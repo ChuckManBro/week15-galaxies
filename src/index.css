@@ -1,0 +1,63 @@
+:root {
+	--bordrer-radius-outer: 14px;
+	--border-radius-inner: calc(var(var(--bordrer-radius-outer) - 6px));
+
+	/* background-color: hotpink; */
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/***** Test Buttons START *****/
+.test-btn {
+	position: fixed;
+	right: 5px;
+	padding: 6px 16px;
+	background-color: #ffdd55;
+	color: black;
+	border: 2px solid black;
+	border-radius: 6px;
+	font-size: 20px;
+}
+.test-btn:hover {
+	background-color: #fbd027;
+}
+#test-btn-1 {
+	top: 5px;
+}
+#test-btn-2 {
+	top: 48px;
+}
+
+/***** Google Icons *****/
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 40;
+}
+
+.planet-icon {
+	font-size: 1rem;
+	color: white;
+}
+
+.btn-planet {
+	border: none;
+	padding: 0.2rem 0.2rem 0;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.btn-edit {
+	background-color: darkolivegreen;
+}
+
+.btn-delete {
+	background-color: darkred;
+}
+
+.btn-add {
+	color: purple;
+	cursor: pointer;
+}
