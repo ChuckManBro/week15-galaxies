@@ -47,21 +47,21 @@ function Planet({ planet, index, galaxy, putToApi }) {
 		setEditMode(!editMode);
 	}
 
-	function handleClickDelete(index) {
-		console.log(`button clicked to DELETE ${index}`); //TEST
+	function updatePlanet(index, insert) {
 		let newArray = galaxy.planets;
-		newArray.splice(index, 1);
+		insert ? newArray.splice(index, 1, insert) : newArray.splice(index, 1);
 		putToApi(newArray);
+		setEditMode(false);
 	}
 
 	if (!editMode)
 		return (
 			<div>
-				<p className='inline'>{planet}</p>
+				<p className="inline">{planet}</p>
 				<button className="btn-planet btn-planet-edit" onClick={toggleEditMode}>
 					<span className="material-symbols-outlined planet-icon">edit</span>
 				</button>
-				<button className="btn-planet btn-planet-delete" onClick={() => handleClickDelete(index)}>
+				<button className="btn-planet btn-planet-delete" onClick={() => updatePlanet(index)}>
 					<span className="material-symbols-outlined planet-icon">delete_forever</span>
 				</button>
 			</div>
@@ -72,7 +72,7 @@ function Planet({ planet, index, galaxy, putToApi }) {
 			<button className="btn-planet btn-planet-cancel" onClick={toggleEditMode}>
 				<span className="material-symbols-outlined planet-icon">close</span>
 			</button>
-			<button className="btn-planet btn-planet-commit">
+			<button className="btn-planet btn-planet-commit" onClick={() => updatePlanet(index, text)}>
 				<span className="material-symbols-outlined planet-icon">done</span>
 			</button>
 		</div>
