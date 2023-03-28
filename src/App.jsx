@@ -11,10 +11,11 @@ function App() {
 
 	useEffect(getData, []);
 
-	//TEST - hotApi variable and IF statement for testing only
+	//TEST - hotApi variable AND 'if' statement for testing only
 	const hotApi = true;
 	function getData() {
-		console.log('useEffect triggered'); //TEST
+		console.log('getData function triggered'); //TEST
+
 		if (hotApi) {
 			fetch(apiUrl, {
 				method: 'GET',
@@ -25,16 +26,16 @@ function App() {
 						return res.json();
 					}
 					// handle error
-					console.log(errorMessage);
+					console.log(`GET error`);
 				})
 				.then(data => {
 					// Do something with the list of data
-					console.log(`Successful data GET from api`); //TEST
+					console.log(`GET successful`); //TEST
 					setGalaxies(data);
 				})
 				.catch(error => {
 					// handle error
-					console.log(errorMessage);
+					console.log(`GET error`);
 				});
 		}
 	}

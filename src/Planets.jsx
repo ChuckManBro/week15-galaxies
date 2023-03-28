@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { apiUrl } from './App';
 
+//COMPONENT - Planets (all planets of galaxy and AddPlanet)
 export default function Planets({ galaxy, getData }) {
 	function putToApi(planetsArr) {
 		fetch(`${apiUrl}/${galaxy.id}`, {
@@ -29,18 +30,51 @@ export default function Planets({ galaxy, getData }) {
 	return (
 		<div>
 			<h4>Planets:</h4>
-			{galaxy.planets.map(e => (
-				<p key={e}>
-					{e}
-					<button className="btn-planet btn-edit">
-						<span className="material-symbols-outlined planet-icon">edit</span>
-					</button>
-					<button className="btn-planet btn-delete">
-						<span className="material-symbols-outlined planet-icon">delete_forever</span>
-					</button>
-				</p>
+			{galaxy.planets.map((planet, index) => (
+				<Planet key={index} planet={planet} index={index} galaxy={galaxy} putToApi={putToApi} />
 			))}
 			<AddPlanet galaxy={galaxy} putToApi={putToApi} />
+		</div>
+	);
+}
+
+//COMPONENT - Planet (each individual planet)
+function Planet({ planet, index, galaxy, putToApi }) {
+	const [editMode, setEditMode] = useState(false);
+	const [text, setText] = useState(planet);
+
+	function toggleEditMode() {
+		setEditMode(!editMode);
+	}
+
+	function handleClickDelete(index) {
+		console.log(`button clicked to DELETE ${index}`); //TEST
+		let newArray = galaxy.planets;
+		newArray.splice(index, 1);
+		putToApi(newArray);
+	}
+
+	if (!editMode)
+		return (
+			<div>
+				<p className='inline'>{planet}</p>
+				<button className="btn-planet btn-planet-edit" onClick={toggleEditMode}>
+					<span className="material-symbols-outlined planet-icon">edit</span>
+				</button>
+				<button className="btn-planet btn-planet-delete" onClick={() => handleClickDelete(index)}>
+					<span className="material-symbols-outlined planet-icon">delete_forever</span>
+				</button>
+			</div>
+		);
+	return (
+		<div>
+			<input value={text} onChange={e => setText(e.target.value)} placeholder={planet} />
+			<button className="btn-planet btn-planet-cancel" onClick={toggleEditMode}>
+				<span className="material-symbols-outlined planet-icon">close</span>
+			</button>
+			<button className="btn-planet btn-planet-commit">
+				<span className="material-symbols-outlined planet-icon">done</span>
+			</button>
 		</div>
 	);
 }
@@ -67,13 +101,16 @@ function AddPlanet({ galaxy, putToApi }) {
 
 	if (!inputVisible)
 		return (
-			<span className="material-symbols-outlined btn-add" onClick={handleClickPlus}>
+			<span className="material-symbols-outlined btn-new-planet" onClick={handleClickPlus}>
 				add_circle
 			</span>
 		);
 	return (
 		<div>
-			<form>
+			<span className="material-symbols-outlined btn-new-planet" onClick={handleClickPlus}>
+				cancel
+			</span>
+			<form className="inline">
 				<input
 					id="input-galaxy"
 					value={text}
