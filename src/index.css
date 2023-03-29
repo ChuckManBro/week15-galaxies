@@ -1,6 +1,8 @@
 :root {
 	--bordrer-radius-outer: 14px;
 	--border-radius-inner: calc(var(var(--bordrer-radius-outer) - 6px));
+	--dark-blue: #001832;
+	--subtle-blue: #092b4f;
 
 	background-color: black;
 }
@@ -16,6 +18,10 @@
 	display: inline;
 }
 
+.block {
+	display: block;
+}
+
 /***** Google Icons *****/
 .material-symbols-outlined {
 	font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 40;
@@ -26,11 +32,20 @@
 	min-height: 100vh;
 }
 
-#img-title {
+/* TEST BUTTON */
+#test-btn {
 	position: fixed;
-	top: 1.5rem;
+	top: 5px;
+	right: 5px;
+	background-color: orange;
+	padding: 0.3rem 0.6rem;
+}
+
+#img-title {
+	position: relative;
 	left: 50%;
 	transform: translate(-50%);
+	margin: 40px 0 100px;
 	max-width: 90vw;
 }
 
@@ -38,85 +53,210 @@
 	position: fixed;
 	bottom: 0;
 	left: 0;
+	max-width: 60vw;
 }
 
 #img-tl {
 	position: fixed;
 	top: 0;
 	left: 0;
+	max-width: 60vw;
 }
 
 #img-br {
 	position: fixed;
 	bottom: 0;
 	right: 0;
+	max-width: 30vw;
 }
 
 .galaxy {
-	background-color: #001c38;
-	mix-blend-mode: screen;
-	margin-bottom: 50px;
-	border-radius: var(--bordrer-radius-outer);
+	/* background-color: #1f3143; */
+	margin-bottom: 120px;
 }
 
-.galaxy-icon {
-	font-size: 1rem;
+.galaxy-title {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+	display: inline-block;
+	padding: 0 0.5rem;
+	background-color: var(--dark-blue);
+	/* background-color: hotpink; */
+}
+
+h1 {
+	color: white;
+	/* -webkit-text-stroke: 2px navy; */
+	font-weight: 400;
+	font-size: 4rem;
+	letter-spacing: 0.2rem;
+}
+
+.container-planets {
+	/* background-color: lime; */
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.container-planet {
+	/* background-color: purple; */
+	background-color: var(--dark-blue);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 5px 25px;
+}
+
+p {
+	font-size: 2rem;
+	font-weight: 300;
+	letter-spacing: 0.1rem;
 	color: white;
 }
 
-.btn-galaxy {
+@media (max-width: 500px) {
+	h1 {
+		font-size: 2.8rem;
+	}
+	p {
+		font-size: 1.5rem;
+	}
+}
+
+.planet-img {
+	border: solid 3px black;
+	border-radius: 200px;
+	display: block;
+}
+
+.planet-0 {
+	/* red */
+	width: 6rem;
+}
+
+.planet-1 {
+	/* orange */
+	width: 5rem;
+	filter: hue-rotate(55deg) saturate(3.5);
+}
+
+.planet-2 {
+	/* yellow */
+	width: 4rem;
+	filter: hue-rotate(65deg) brightness(2.5) saturate(0.6);
+}
+
+.planet-3 {
+	/* green */
+	width: 7rem;
+	filter: hue-rotate(120deg) saturate(0.4) brightness(1.2);
+}
+
+.planet-4 {
+	/* blue */
+	width: 8rem;
+	filter: hue-rotate(240deg) saturate(0.9);
+}
+
+.planet-5 {
+	/* purple */
+	width: 10rem;
+	filter: hue-rotate(300deg) saturate(0.8);
+}
+
+.icon {
+	font-size: 1rem;
+	color: var(--dark-blue);
+}
+
+.btn {
 	border: none;
 	padding: 0.2rem 0.2rem 0;
 	border-radius: 4px;
 	cursor: pointer;
+	margin: 5px 3px;
 }
 
-.btn-galaxy-edit {
-	background-color: darkorange;
+.btn:hover {
+	background-color: white;
 }
 
-.btn-galaxy-delete {
-	background-color: #d212b5;
+.btn-edit {
+	background-color: var(--subtle-blue);
 }
 
-.btn-galaxy-cancel {
-	background-color: #161687;
+.btn-delete {
+	background-color: var(--subtle-blue);
 }
 
-.btn-galaxy-commit {
-	background-color: #0e4f0e;
+.btn-delete:hover {
+	background-color: #b22625;
 }
 
-.planet-icon {
-	font-size: 1rem;
-	color: white;
+.btn-cancel {
+	background-color: #a2b3c5;
 }
 
-.btn-planet {
-	border: none;
-	padding: 0.2rem 0.2rem 0;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-.btn-planet-edit {
-	background-color: darkolivegreen;
-}
-
-.btn-planet-delete {
-	background-color: darkred;
-}
-
-.btn-planet-cancel {
-	background-color: blue;
-}
-
-.btn-planet-commit {
+.btn-commit {
 	background-color: green;
 }
 
+.container-add-planet {
+	display: flex;
+	align-items: center;
+	margin-bottom: 60px;
+}
+
 .btn-new-planet {
-	color: purple;
+	color: var(--subtle-blue);
 	cursor: pointer;
-	font-size: 1.5rem;
+	font-size: 3.5rem;
+}
+
+.btn-new-planet:hover {
+	color: white;
+}
+
+#footer {
+	padding-bottom: 30vh;
+	display: flex;
+	justify-content: center;
+}
+
+#container-new-galaxy {
+	background-color: #d9efff;
+	padding: 0.4rem 1.5rem 1rem;
+	border-radius: 20px;
+	border: solid 5px black;
+}
+
+h2 {
+	text-align: center;
+	padding-bottom: 1rem;
+	font-size: 1.7rem;
+	font-weight: 400;
+	letter-spacing: 0.05rem;
+}
+
+label {
+	font-size: 1.7rem;
+	font-weight: 400;
+	letter-spacing: 0.05rem;
+}
+
+input {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 1.4rem;
+	font-weight: bold;
+	padding: 0 4px;
+	color: #3748a4;
+}
+
+.btn-add {
+	font-size: 1.3rem;
+	padding: 0 5px 0.1rem;
+	margin-left: 5px;
 }

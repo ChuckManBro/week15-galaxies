@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { apiUrl } from './App';
+import planetImg from './assets/planet.png';
 
 //COMPONENT - Planets (all planets of galaxy and AddPlanet)
 export default function Planets({ galaxy, getData }) {
+	function random6() {
+		let numbers = [0, 1, 2, 3, 4, 5];
+		for (let i = 5; i > 0; i--) {
+			let random = Math.floor(Math.random() * (i + 1));
+			[numbers[i], numbers[random]] = [numbers[random], numbers[i]];
+		}
+		return numbers;
+	}
+	const randomSeries = [...random6(), ...random6(), ...random6(), ...random6()];
+
 	function putToApi(planetsArr) {
 		fetch(`${apiUrl}/${galaxy.id}`, {
 			method: 'PUT',
@@ -27,18 +38,22 @@ export default function Planets({ galaxy, getData }) {
 	}
 
 	return (
-		<div>
-			<h4>Planets:</h4>
+		<div className="container-planets">
 			{galaxy.planets.map((planet, index) => (
-				<Planet key={index} planet={planet} index={index} galaxy={galaxy} putToApi={putToApi} />
+				<div className="container-planet">
+					<img className={`planet-img planet-${randomSeries[index]}`} src={planetImg}></img>
+					<Planet key={index} planet={planet} index={index} galaxy={galaxy} putToApi={putToApi} />
+				</div>
 			))}
-			<AddPlanet galaxy={galaxy} putToApi={putToApi} />
+			<div className="container-add-planet">
+				<AddPlanet galaxy={galaxy} putToApi={putToApi} />
+			</div>
 		</div>
 	);
 }
 
 //COMPONENT - Planet (each individual planet)
-function Planet({ planet, index, galaxy, putToApi }) {
+function Planet({ planet, index, galaxy, colorSize, putToApi }) {
 	const [editMode, setEditMode] = useState(false);
 	const [text, setText] = useState(planet);
 
@@ -55,26 +70,36 @@ function Planet({ planet, index, galaxy, putToApi }) {
 
 	if (!editMode)
 		return (
-			<div>
-				<p className="inline">{planet}</p>
-				<button className="btn-planet btn-planet-edit" onClick={toggleEditMode}>
-					<span className="material-symbols-outlined planet-icon">edit</span>
-				</button>
-				<button className="btn-planet btn-planet-delete" onClick={() => updatePlanet(index)}>
-					<span className="material-symbols-outlined planet-icon">delete_forever</span>
-				</button>
-			</div>
+			<>
+				<p>{planet}</p>
+				<div>
+					<button className="btn btn-edit" onClick={toggleEditMode}>
+						<span className="material-symbols-outlined icon">edit</span>
+					</button>
+					<button className="btn btn-delete" onClick={() => updatePlanet(index)}>
+						<span className="material-symbols-outlined icon">delete_forever</span>
+					</button>
+				</div>
+			</>
 		);
 	return (
-		<div>
-			<input value={text} onChange={e => setText(e.target.value)} placeholder={planet} />
-			<button className="btn-planet btn-planet-cancel" onClick={toggleEditMode}>
-				<span className="material-symbols-outlined planet-icon">close</span>
-			</button>
-			<button className="btn-planet btn-planet-commit" onClick={() => updatePlanet(index, text)}>
-				<span className="material-symbols-outlined planet-icon">done</span>
-			</button>
-		</div>
+		<>
+			<input
+				className="block"
+				value={text}
+				onChange={e => setText(e.target.value)}
+				placeholder={planet}
+				maxLength="14"
+			/>
+			<div>
+				<button className="btn btn-cancel" onClick={toggleEditMode}>
+					<span className="material-symbols-outlined icon">close</span>
+				</button>
+				<button className="btn btn-commit" onClick={() => updatePlanet(index, text)}>
+					<span className="material-symbols-outlined icon">done</span>
+				</button>
+			</div>
+		</>
 	);
 }
 
@@ -105,7 +130,7 @@ function AddPlanet({ galaxy, putToApi }) {
 			</span>
 		);
 	return (
-		<div>
+		<>
 			<span className="material-symbols-outlined btn-new-planet" onClick={handleClickPlus}>
 				cancel
 			</span>
@@ -116,8 +141,8 @@ function AddPlanet({ galaxy, putToApi }) {
 					onChange={e => setText(e.target.value)}
 					placeholder="(new planet name)"
 				/>
-				<button onClick={handleClickAdd}>Add</button>
+				<button className='btn-add' onClick={handleClickAdd}>Add</button>
 			</form>
-		</div>
+		</>
 	);
 }
