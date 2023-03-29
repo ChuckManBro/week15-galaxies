@@ -2,43 +2,89 @@
 	--bordrer-radius-outer: 14px;
 	--border-radius-inner: calc(var(var(--bordrer-radius-outer) - 6px));
 
-	/* background-color: hotpink; */
+	background-color: black;
 }
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Londrina Solid', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .inline {
 	display: inline;
 }
 
-/***** Test Buttons START *****/
-.test-btn {
-	position: fixed;
-	right: 5px;
-	padding: 6px 16px;
-	background-color: #ffdd55;
-	color: black;
-	border: 2px solid black;
-	border-radius: 6px;
-	font-size: 20px;
-}
-.test-btn:hover {
-	background-color: #fbd027;
-}
-#test-btn-1 {
-	top: 5px;
-}
-#test-btn-2 {
-	top: 48px;
-}
-
 /***** Google Icons *****/
 .material-symbols-outlined {
 	font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 40;
+}
+
+#App {
+	background-image: url(./assets/bkg.png);
+	min-height: 100vh;
+}
+
+#img-title {
+	position: fixed;
+	top: 1.5rem;
+	left: 50%;
+	transform: translate(-50%);
+	max-width: 90vw;
+}
+
+#img-bl {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+#img-tl {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#img-br {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+
+.galaxy {
+	background-color: #001c38;
+	mix-blend-mode: screen;
+	margin-bottom: 50px;
+	border-radius: var(--bordrer-radius-outer);
+}
+
+.galaxy-icon {
+	font-size: 1rem;
+	color: white;
+}
+
+.btn-galaxy {
+	border: none;
+	padding: 0.2rem 0.2rem 0;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.btn-galaxy-edit {
+	background-color: darkorange;
+}
+
+.btn-galaxy-delete {
+	background-color: #d212b5;
+}
+
+.btn-galaxy-cancel {
+	background-color: #161687;
+}
+
+.btn-galaxy-commit {
+	background-color: #0e4f0e;
 }
 
 .planet-icon {

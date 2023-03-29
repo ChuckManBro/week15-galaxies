@@ -18,7 +18,6 @@ export default function Planets({ galaxy, getData }) {
 			})
 			.then(task => {
 				// Do something with updated task
-				console.log(`planet successfully PUT to api`);
 				getData();
 			})
 			.catch(error => {

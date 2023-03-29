@@ -8,7 +8,6 @@ export default function FormGalaxy({ getData }) {
 
 	function handleClickAdd(e) {
 		e.preventDefault(); //Prevents form button from refreshing page
-		console.log(`Add Galaxy button clicked`); //TEST
 
 		if (text) {
 			const newGalaxy = {
@@ -30,10 +29,9 @@ export default function FormGalaxy({ getData }) {
 				})
 				.then(task => {
 					// do something with the new task
-					console.log(`${newGalaxy.galaxyName} successfully POSTed`); //TEST
+					getData();
 					// Clear the text field
 					setText('');
-					getData();
 				})
 				.catch(error => {
 					// handle error
