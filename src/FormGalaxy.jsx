@@ -41,12 +41,19 @@ export default function FormGalaxy({ getData }) {
 	}
 
 	return (
-		<div id='container-new-galaxy'>
+		<div id="container-new-galaxy">
 			<h2>Add a new galaxy:</h2>
 			<form>
 				<label htmlFor="input-galaxy">Name: </label>
-				<input id="input-galaxy" value={text} onChange={e => setText(e.target.value)} />
-				<button className='btn-add' onClick={handleClickAdd}>Add</button>
+				<input
+					id="input-galaxy"
+					value={text}
+					onChange={e => setText(e.target.value)}
+					maxLength="14"
+				/>
+				<button className="btn-add" onClick={handleClickAdd}>
+					Add
+				</button>
 			</form>
 		</div>
 	);

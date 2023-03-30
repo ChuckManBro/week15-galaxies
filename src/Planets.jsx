@@ -4,6 +4,7 @@ import planetImg from './assets/planet.png';
 
 //COMPONENT - Planets (all planets of galaxy and AddPlanet)
 export default function Planets({ galaxy, getData }) {
+	// Generate a randomSeries array to randomize the six planet styles
 	function random6() {
 		let numbers = [0, 1, 2, 3, 4, 5];
 		for (let i = 5; i > 0; i--) {
@@ -139,9 +140,12 @@ function AddPlanet({ galaxy, putToApi }) {
 					id="input-galaxy"
 					value={text}
 					onChange={e => setText(e.target.value)}
-					placeholder="(new planet name)"
+					placeholder="planet name"
+					maxLength="14"
 				/>
-				<button className='btn-add' onClick={handleClickAdd}>Add</button>
+				<button className="btn-add" onClick={handleClickAdd}>
+					Add
+				</button>
 			</form>
 		</>
 	);
