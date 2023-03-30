@@ -1,6 +1,4 @@
 :root {
-	--bordrer-radius-outer: 14px;
-	--border-radius-inner: calc(var(var(--bordrer-radius-outer) - 6px));
 	--dark-blue: #001832;
 	--subtle-blue: #092b4f;
 
@@ -52,6 +50,7 @@
 	bottom: 0;
 	left: 0;
 	max-width: 60vw;
+	max-height: 15vh;
 }
 
 #img-tl {
@@ -59,6 +58,7 @@
 	top: 0;
 	left: 0;
 	max-width: 60vw;
+	max-height: 25vh;
 }
 
 #img-br {
@@ -66,6 +66,7 @@
 	bottom: 0;
 	right: 0;
 	max-width: 30vw;
+	max-height: 20vh;
 }
 
 .galaxy {
