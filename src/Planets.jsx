@@ -41,7 +41,7 @@ export default function Planets({ galaxy, getData }) {
 	return (
 		<div className="container-planets">
 			{galaxy.planets.map((planet, index) => (
-				<div className="container-planet">
+				<div className="container-planet" key={planet}>
 					<img className={`planet-img planet-${randomSeries[index]}`} src={planetImg}></img>
 					<Planet key={index} planet={planet} index={index} galaxy={galaxy} putToApi={putToApi} />
 				</div>

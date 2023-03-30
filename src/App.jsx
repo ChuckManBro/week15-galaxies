@@ -4,8 +4,9 @@ import cornerBR from './assets/corner-br.png';
 import cornerTL from './assets/corner-tl.png';
 import title from './assets/title.png';
 import visitor from './assets/visitor.png';
-import FormGalaxy from './FormGalaxy';
+import GalaxyTitle from './GalaxyTitle';
 import Planets from './Planets';
+import FormGalaxy from './FormGalaxy';
 
 const apiUrl = 'https://6421ee1486992901b2bf52bf.mockapi.io/universe';
 
@@ -45,9 +46,7 @@ function App() {
 			<img id="img-title" src={title} />
 			{galaxies.map(e => (
 				<div key={e.id} className="galaxy position-rel">
-					<div className="galaxy-title">
-						<Galaxy galaxy={e} getData={getData} />
-					</div>
+					<GalaxyTitle galaxy={e} getData={getData} />
 					<Planets galaxy={e} getData={getData} />
 				</div>
 			))}
@@ -61,90 +60,6 @@ function App() {
 			<img id="img-br" src={cornerBR} alt="random red colored planet" />
 			<img id="img-bl" src={cornerBL} alt="random green colored planet" />
 		</div>
-	);
-}
-
-//COMPONENT - Galaxy
-function Galaxy({ galaxy, getData }) {
-	const [editMode, setEditMode] = useState(false);
-	const [text, setText] = useState(galaxy.galaxyName);
-
-	function toggleEditMode() {
-		setEditMode(!editMode);
-	}
-
-	function deleteGalaxy(id) {
-		fetch(`${apiUrl}/${id}`, {
-			method: 'DELETE',
-		})
-			.then(res => {
-				if (res.ok) {
-					return res.json();
-				}
-				// handle error
-				console.log(`Error deleting galaxy from api`);
-			})
-			.then(task => {
-				// Do something with deleted task
-				getData();
-			})
-			.catch(error => {
-				// handle error
-				console.log(`Error deleting galaxy from api`);
-			});
-	}
-
-	function updateGalaxy(id) {
-		fetch(`${apiUrl}/${id}`, {
-			method: 'PUT',
-			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify({ galaxyName: text }),
-		})
-			.then(res => {
-				if (res.ok) {
-					return res.json();
-				}
-				// handle error
-				console.log(`Error updating galaxy to api`);
-			})
-			.then(task => {
-				// Do something with updated task
-				getData();
-				setEditMode(false);
-			})
-			.catch(error => {
-				// handle error
-				console.log(`Error updating galaxy to api`);
-			});
-	}
-
-	if (!editMode)
-		return (
-			<>
-				<h1 className="inline">{galaxy.galaxyName}</h1>
-				<button className="btn btn-edit" onClick={toggleEditMode}>
-					<span className="material-symbols-outlined icon">edit</span>
-				</button>
-				<button className="btn btn-delete" onClick={() => deleteGalaxy(galaxy.id)}>
-					<span className="material-symbols-outlined icon">delete_forever</span>
-				</button>
-			</>
-		);
-	return (
-		<>
-			<input
-				value={text}
-				onChange={e => setText(e.target.value)}
-				placeholder={galaxy.galaxyName}
-				maxLength="14"
-			/>
-			<button className="btn btn-cancel" onClick={toggleEditMode}>
-				<span className="material-symbols-outlined icon">close</span>
-			</button>
-			<button className="btn btn-commit" onClick={() => updateGalaxy(galaxy.id)}>
-				<span className="material-symbols-outlined icon">done</span>
-			</button>
-		</>
 	);
 }
 
